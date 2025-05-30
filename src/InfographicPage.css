@@ -3,7 +3,7 @@
 .infographic-container {
   max-width: 100%; /* Ensure container does not restrict width */
   margin: 20px auto; /* Center content with some margin */
-  padding: 0 20px; /* Add some padding on the sides */
+  /* padding: 0 20px; */ /* This line was removed/commented out to allow full width */
   box-sizing: border-box; /* Include padding in width calculation */
 }
 
