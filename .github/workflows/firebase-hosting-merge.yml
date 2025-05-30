@@ -18,10 +18,10 @@ jobs:
       with:
         node-version: 20.x
 
-    # --- IMPORTANT ADDITION: Install dependencies before building ---
+    # --- IMPORTANT: Install dependencies before building ---
     - name: Install dependencies
       run: npm install
-    # --- END IMPORTANT ADDITION ---
+    # --- END IMPORTANT ---
 
     - name: Run npm run build
       run: npm run build
