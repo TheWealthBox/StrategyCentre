@@ -4,7 +4,7 @@ name: Deploy to Firebase Hosting on merge
 on:
   push:
     branches:
-      - master # or main, depending on your main branch name
+      - master # or main, depending on your main branch name (usually 'main' in newer repos)
 
 jobs:
   build_and_deploy:
@@ -18,7 +18,7 @@ jobs:
       with:
         node-version: 20.x
 
-    # --- IMPORTANT: ADD THIS STEP IF IT'S MISSING ---
+    # --- IMPORTANT ADDITION: Install dependencies before building ---
     - name: Install dependencies
       run: npm install
     # --- END IMPORTANT ADDITION ---
@@ -26,9 +26,8 @@ jobs:
     - name: Run npm run build
       run: npm run build
       env:
-        # If you have environment variables for production build, define them here.
-        # Example: CI: true is often used to prevent build warnings from failing CI builds.
-        CI: true 
+        # CI: true is often used in CI/CD to prevent warnings from breaking the build
+        CI: true
 
     - name: Deploy to Firebase Hosting
       uses: FirebaseExtended/action-hosting-deploy@v0
@@ -36,4 +35,5 @@ jobs:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STRATEGYCENTRE_WEALTHBOX }}'
         projectId: strategycentre-wealthbox
-        # Live channel is 'live' by default. You can specify a different channel here if needed.
+        # --- IMPORTANT CHANGE: Removed 'expires: 7d' as it's for preview channels ---
+        # When deploying to the default branch (master/main) without channelId, it deploys to live.
