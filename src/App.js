@@ -8,7 +8,7 @@ import './App.css'; // Your main App.css for general styles
 import StrategyDetails from './StrategyDetails'; // Your StrategyDetails component
 
 // App ID for Firestore collections
-const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-investment-app';
+const appId = 'default-investment-app'; // Direct assignment to avoid 'no-undef' error
 
 // Home Component - Now fetches strategies dynamically
 const Home = () => {

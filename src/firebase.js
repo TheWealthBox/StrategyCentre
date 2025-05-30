@@ -1,4 +1,3 @@
-/* global __firebase_config __initial_auth_token */
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, doc, setDoc, getDoc, query, onSnapshot } from 'firebase/firestore';
@@ -19,10 +18,8 @@ const localFirebaseConfig = {
   measurementId: "G-D8RFTGD497" // Your actual Measurement ID (optional)
 };
 
-// Use the Canvas provided config if available, otherwise use local config
-const firebaseConfig = typeof __firebase_config !== 'undefined'
-  ? JSON.parse(__firebase_config)
-  : localFirebaseConfig;
+// Directly use the local Firebase configuration for your React app build
+const firebaseConfig = localFirebaseConfig;
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -34,10 +31,8 @@ const auth = getAuth(app);
 // This is a placeholder for a custom authentication token.
 // In a real application, this token would be securely generated on your backend
 // and passed to the frontend for authentication.
-// For demonstration purposes, we might use a hardcoded token or rely on anonymous auth.
-const initialAuthToken = typeof __initial_auth_token !== 'undefined'
-  ? __initial_auth_token
-  : null; // Set to null to use anonymous auth fallback in App.js or remove if not needed.
+// For demonstration purposes, we will directly set it to null for now.
+const initialAuthToken = null; // Set to null as __initial_auth_token is not defined in local builds
 
 // Export ALL necessary Firebase instances and functions
 export {
