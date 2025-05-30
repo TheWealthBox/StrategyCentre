@@ -1,0 +1,111 @@
+/* General app styling */
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f0f2f5; /* Light background for the whole app */
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top */
+}
+
+.app-home-container {
+  max-width: 800px;
+  width: 100%; /* Make it fluid */
+  margin: 20px auto; /* Center it with some top/bottom margin */
+  padding: 30px;
+  background-color: #ffffff; /* White background for the content box */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Stronger, softer shadow */
+  box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.app-main-title {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 2.8em; /* Larger title */
+  font-weight: 700; /* Bolder */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.app-intro {
+  color: #555;
+  margin-bottom: 40px;
+  font-size: 1.2em; /* Slightly larger intro text */
+  line-height: 1.6;
+}
+
+.strategy-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Increased gap */
+  margin-bottom: 40px;
+}
+
+.strategy-list-item {
+  background-color: #eaf6ff; /* Light blue background for items */
+  padding: 20px 30px; /* More padding */
+  border-radius: 10px; /* More rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  flex: 1 1 calc(50% - 40px); /* Two columns on larger screens, responsive */
+  max-width: calc(50% - 40px); /* Max width for two columns */
+  min-width: 280px; /* Minimum width before wrapping */
+  box-sizing: border-box;
+}
+
+.strategy-list-item:hover {
+  transform: translateY(-5px); /* More pronounced lift effect */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+  background-color: #d8edff; /* Slightly darker blue on hover */
+}
+
+.strategy-list-item a {
+  text-decoration: none;
+  color: #007bff; /* Brighter blue for links */
+  font-weight: 600; /* Slightly less bold than before, more modern */
+  font-size: 1.25em; /* Larger link text */
+  display: block; /* Make the whole div clickable via link */
+}
+
+.strategy-list-item a:hover {
+  color: #0056b3; /* Darker blue on hover */
+}
+
+.login-prompt {
+  margin-top: 30px;
+  color: #888;
+  font-size: 0.95em; /* Slightly larger */
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-home-container {
+    padding: 20px;
+    margin: 15px auto;
+  }
+
+  .app-main-title {
+    font-size: 2.2em;
+  }
+
+  .app-intro {
+    font-size: 1em;
+  }
+
+  .strategy-list-item {
+    flex: 1 1 100%; /* Single column on small screens */
+    max-width: 100%;
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main-title {
+    font-size: 1.8em;
+  }
+}
