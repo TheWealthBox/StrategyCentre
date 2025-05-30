@@ -8,7 +8,7 @@ const InfographicPage = () => {
       <p>Explore this interactive infographic on investment strategies.</p>
       <iframe
         id="quant-strategy-mixer"
-        src="https://codepen.io/Scintific-Investor/embed/GgJoqRL?default-tab=html%2Cresult" // Corrected Codepen Embed URL
+        src="https://codepen.io/Scintific-Investor/embed/GgJoqRL?default-tab=result" // Corrected Codepen Embed URL
         width="100%"
         height="800px" // Increased height to prevent scroll and "Run Pen" block
         frameBorder="0"
