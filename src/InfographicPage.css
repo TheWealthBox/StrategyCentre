@@ -8,6 +8,9 @@
   box-sizing: border-box;
 }
 
+/* This CSS below is for directly styled iframes, but with the new div method,
+   ei.js largely handles the iframe styling. Keep it, but the div's width
+   will be more influential. */
 .infographic-container iframe {
   display: block;
   width: 100%;
