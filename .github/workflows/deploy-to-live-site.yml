@@ -34,5 +34,8 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STRATEGYCENTRE_WEALTHBOX }}'
           projectId: strategycentre-wealthbox
-          # IMPORTANT: Do NOT include 'expires' or 'channelId' here for live site deployment.
-          # The action will default to 'firebase deploy' which deploys to the live site.
+          # WORKAROUND: Explicitly setting channelId to 'live' because the action
+          # seems to be incorrectly trying to deploy to a channel even for the main branch,
+          # and then requiring a channelId. 'live' is the default channel for your main site.
+          channelId: live
+          # Do NOT include 'expires: 7d' here, as it's a permanent live deployment.
