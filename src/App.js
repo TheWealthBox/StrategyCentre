@@ -1,14 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// Import Firebase instances from your new firebase.js file
-import { db, auth, initialAuthToken, collection, doc, setDoc, getDoc, query, onSnapshot, onAuthStateChanged, signInWithCustomToken, signInAnonymously, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut } from './firebase';
+// Import ALL necessary Firebase instances and functions from your firebase.js file
+// 'getDoc' is removed as it's not directly used in App.js; it's used in StrategyDetails.js
+import { 
+  db, 
+  auth, 
+  initialAuthToken,
+  collection, 
+  doc, 
+  setDoc, 
+  query, 
+  onSnapshot, 
+  onAuthStateChanged, 
+  signInWithCustomToken, 
+  signInAnonymously, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut 
+} from './firebase';
 
 import './App.css'; // Your main App.css for general styles
 import StrategyDetails from './StrategyDetails'; // Your StrategyDetails component
 
-// App ID for Firestore collections
-const appId = 'default-investment-app'; // Direct assignment to avoid 'no-undef' error
+// --- NEW ADDITION: Import your new InfographicPage component ---
+import InfographicPage from './InfographicPage';
+// --- END NEW ADDITION ---
+
+// App ID for Firestore collections - using direct assignment for local builds
+const appId = 'default-investment-app';
 
 // Home Component - Now fetches strategies dynamically
 const Home = () => {
@@ -69,6 +89,13 @@ const Home = () => {
       ) : (
         <p className="app-intro">No strategies available. Please upload data to Firestore.</p>
       )}
+
+      {/* --- NEW ADDITION: Link to your new Infographic Page --- */}
+      <div className="infographic-link-container" style={{ marginTop: '20px' }}>
+        <Link to="/infographic" className="infographic-link-button">View Infographic Article</Link>
+      </div>
+      {/* --- END NEW ADDITION --- */}
+
       <p className="login-prompt">
         If you have a login screen, ensure you've logged in or bypassed it to see this content.
         <br/>
@@ -100,7 +127,7 @@ const App = () => {
         setUser(currentUser);
       } else {
         // Sign in anonymously if no custom token is provided
-        if (initialAuthToken) { // Use the imported initialAuthToken
+        if (initialAuthToken) { 
           try {
             await signInWithCustomToken(auth, initialAuthToken);
           } catch (error) {
@@ -139,6 +166,7 @@ const App = () => {
       </div>
     </div>
   );
+
   const handleAuthAction = async (e) => {
     e.preventDefault();
     setAuthError('');
@@ -212,108 +240,126 @@ const App = () => {
 
         {!user || user.isAnonymous ? (
           // Login/Registration Section
-          <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-200">
-            <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
-              {isLogin ? 'Login' : 'Create Account'}
-            </h2>
-            <form onSubmit={handleAuthAction} className="space-y-4">
-              {!isLogin && (
-                <>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="firstName">First Name</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      required={!isLogin}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="lastName">Last Name</label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      required={!isLogin}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="phone">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      required={!isLogin}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="country">Country of Residence</label>
-                    <input
-                      type="text"
-                      id="country"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                      value={country}
-                      onChange={(e) => setCountry(e.target.value)}
-                      required={!isLogin}
-                    />
-                  </div>
-                </>
-              )}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  id="password"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              {authError && <p className="text-red-600 text-sm mt-2">{authError}</p>}
-              <button
-                type="submit"
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out"
-              >
-                {isLogin ? 'Login' : 'Register'}
-              </button>
-            </form>
-            <p className="text-center text-sm text-gray-600 mt-4">
-              {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
-              <button
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none"
-              >
-                {isLogin ? 'Register here' : 'Login here'}
-              </button>
-            </p>
+          <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+              <h2 className="text-3xl font-bold text-center mb-6 text-blue-700">
+                {isLogin ? 'Login' : 'Create Account'}
+              </h2>
+              <form onSubmit={handleAuthAction} className="space-y-4">
+                {!isLogin && (
+                  <>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="firstName">First Name</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required={!isLogin}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="lastName">Last Name</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required={!isLogin}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required={!isLogin}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="country">Country of Residence</label>
+                      <input
+                        type="text"
+                        id="country"
+                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                        value={country}
+                        onChange={(e) => setCountry(e.target.value)}
+                        required={!isLogin}
+                      />
+                    </div>
+                  </>
+                )}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    id="password"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                {authError && <p className="text-red-600 text-sm mt-2">{authError}</p>}
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-150 ease-in-out"
+                >
+                  {isLogin ? 'Login' : 'Register'}
+                </button>
+              </form>
+              <p className="text-center text-sm text-gray-600 mt-4">
+                {isLogin ? "Don't have an account?" : "Already have an account?"}{' '}
+                <button
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="text-blue-600 hover:text-blue-800 font-medium focus:outline-none"
+                >
+                  {isLogin ? 'Register here' : 'Login here'}
+                </button>
+              </p>
+            </div>
           </div>
         ) : (
           // Dashboard Section
-          <Routes>
-            {/* Route for the home page (list of strategies) */}
-            <Route path="/" element={<Home />} />
-            {/* Route for individual strategy details page */}
-            <Route path="/strategies/:strategyCode" element={<StrategyDetails />} />
-            {/* Add other routes as needed */}
-          </Routes>
+          <div className="min-h-screen bg-gray-100 p-4">
+            <div className="flex justify-end p-4">
+              <button
+                onClick={handleLogout}
+                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+              >
+                Logout
+              </button>
+            </div>
+            <Routes>
+              {/* Route for the home page (list of strategies) */}
+              <Route path="/" element={<Home />} />
+              {/* Route for individual strategy details page */}
+              <Route path="/strategies/:strategyCode" element={<StrategyDetails />} />
+              {/* Add other routes as needed */}
+
+              {/* --- NEW ADDITION START --- */}
+              {/* Add the new route for your InfographicPage */}
+              <Route path="/infographic" element={<InfographicPage />} />
+              {/* --- NEW ADDITION END --- */}
+
+            </Routes>
+          </div>
         )}
       </div>
     </Router>

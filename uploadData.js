@@ -44,7 +44,7 @@ const uploadData = async () => {
       assetClassUniverse: "MultiAsset",
       rebalancingFrequency: "Monthly",
       lastRebalancingDate: "2025-05-01",
-      nextRebalancingDate: "2025-06-01",
+      nextRebalancingDate: "2025-05-31",
       strategyBenchmark: "All World Index",
       past1YReturns: "25.5%",
       past2YReturns: "40.1%",
