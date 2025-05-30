@@ -1,14 +1,14 @@
 /* src/components/InfographicPage.css */
 
 .infographic-container {
-  max-width: 100%; /* Important: ensures it doesn't get artificially constrained */
-  margin: 20px auto; /* Centers the container */
-  /* Remove or comment out any padding that restricts width, e.g.: */
+  max-width: 100%;
+  margin: 20px auto;
+  /* This line MUST NOT be present or must be commented out: */
   /* padding: 0 20px; */
-  box-sizing: border-box; /* Ensures padding is included in total width */
+  box-sizing: border-box;
 }
 
 .infographic-container iframe {
-  display: block; /* Important for full width and removing extra space */
-  width: 100%; /* Ensures the iframe takes 100% of the container's width */
+  display: block;
+  width: 100%;
 }

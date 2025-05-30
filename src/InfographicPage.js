@@ -1,3 +1,5 @@
+// src/components/InfographicPage.js
+
 import React from 'react';
 import './InfographicPage.css';
 
@@ -8,10 +10,11 @@ const InfographicPage = () => {
       <p>Explore this interactive infographic on investment strategies.</p>
       <iframe
         id="quant-strategy-mixer"
-        src="https://codepen.io/Scintific-Investor/full/GgJoqRL" // Corrected Codepen Embed URL
-        width="100%"
-        height="800px" // Increased height to prevent scroll and "Run Pen" block
-        frameBorder="0"
+        // --- THIS MUST BE THE FULL PAGE VIEW URL ---
+        src="https://codepen.io/Scintific-Investor/full/GgJoqRL" // ENSURE THIS IS THE URL
+        width="100%" // This ensures it takes 100% of its parent's width.
+        height="1500px" // Keep this height for now.
+        frameBorder="0" // Set frameborder to 0 for a cleaner look
         allowTransparency="true"
         allowFullScreen="true"
         title="Quant Strategy Mixer: Smarter Investing Infographic"
