@@ -151,7 +151,7 @@ const StrategyDetails = () => {
       </section>
 
       <section className="strategy-section allocation-section">
-        <h2 className="section-title">Latest Allocation Details</h2>
+        <h2 className="section-title">Latest Allocation Details - 30/05/2025</h2>
         {/* Changed from strategyDetails.latestAllocations to strategyDetails.latest_Month_Allocations */}
         {strategyDetails && strategyDetails.latest_Month_Allocations && strategyDetails.latest_Month_Allocations.length > 0 ? (
           <table className="data-table">
@@ -174,7 +174,7 @@ const StrategyDetails = () => {
           <p>No latest allocation details available.</p>
         )}
 
-        <h2 className="section-title">Past Allocation Details</h2>
+        <h2 className="section-title">Past Allocation Details - 31/06/2025</h2>
         {/* Changed from strategyDetails.pastAllocations to strategyDetails.past_Month_Allocations */}
         {strategyDetails && strategyDetails.past_Month_Allocations && strategyDetails.past_Month_Allocations.length > 0 ? (
           <table className="data-table">
