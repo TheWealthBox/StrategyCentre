@@ -36,4 +36,4 @@ jobs:
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STRATEGYCENTRE_WEALTHBOX }}'
         projectId: strategycentre-wealthbox
         # The 'expires: 7d' line has been REMOVED from here.
-        # When deploying to the default branch (master/main) without channelId, it deploys to live.
+        # This ensures deployment goes to the live site (default channel) for the master/main branch.
