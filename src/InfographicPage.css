@@ -1,16 +1,14 @@
 /* src/components/InfographicPage.css */
 
 .infographic-container {
-  max-width: 100%; /* Ensure container does not restrict width */
-  margin: 20px auto; /* Center content with some margin */
-  /* padding: 0 20px; */ /* This line was removed/commented out to allow full width */
-  box-sizing: border-box; /* Include padding in width calculation */
+  max-width: 100%; /* Important: ensures it doesn't get artificially constrained */
+  margin: 20px auto; /* Centers the container */
+  /* Remove or comment out any padding that restricts width, e.g.: */
+  /* padding: 0 20px; */
+  box-sizing: border-box; /* Ensures padding is included in total width */
 }
 
-/* Ensure the iframe itself takes up the available space */
 .infographic-container iframe {
-  display: block; /* Remove any extra space below iframe */
-  width: 100%; /* Ensure it spans the full width of its container */
-  /* Height is set directly in JS for more control, but CSS can override if needed */
-  /* height: 800px; */ /* Consider if you want fixed height here or in JS */
+  display: block; /* Important for full width and removing extra space */
+  width: 100%; /* Ensures the iframe takes 100% of the container's width */
 }
