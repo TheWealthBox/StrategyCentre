@@ -35,5 +35,5 @@ jobs:
         repoToken: '${{ secrets.GITHUB_TOKEN }}'
         firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_STRATEGYCENTRE_WEALTHBOX }}'
         projectId: strategycentre-wealthbox
-        # The 'expires: 7d' line has been REMOVED from here.
+        # The 'expires: 7d' line has been REMOVED from here, permanently.
         # This ensures deployment goes to the live site (default channel) for the master/main branch.
