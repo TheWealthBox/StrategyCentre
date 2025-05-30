@@ -3,21 +3,21 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // Import ALL necessary Firebase instances and functions from your firebase.js file
 // 'getDoc' is removed as it's not directly used in App.js; it's used in StrategyDetails.js
-import { 
-  db, 
-  auth, 
+import {
+  db,
+  auth,
   initialAuthToken,
-  collection, 
-  doc, 
-  setDoc, 
-  query, 
-  onSnapshot, 
-  onAuthStateChanged, 
-  signInWithCustomToken, 
-  signInAnonymously, 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  signOut 
+  collection,
+  doc,
+  setDoc,
+  query,
+  onSnapshot,
+  onAuthStateChanged,
+  signInWithCustomToken,
+  signInAnonymously,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut
 } from './firebase';
 
 import './App.css'; // Your main App.css for general styles
@@ -127,7 +127,7 @@ const App = () => {
         setUser(currentUser);
       } else {
         // Sign in anonymously if no custom token is provided
-        if (initialAuthToken) { 
+        if (initialAuthToken) {
           try {
             await signInWithCustomToken(auth, initialAuthToken);
           } catch (error) {
