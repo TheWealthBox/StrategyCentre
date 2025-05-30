@@ -109,3 +109,21 @@
     font-size: 1.8em;
   }
 }
+
+/* Styling for the infographic link button */
+.infographic-link-button {
+  font-size: 1.5em; /* Adjust this value (e.g., 1.2em, 1.8em, 2em) for desired size */
+  font-weight: bold; /* Makes the text bold for emphasis */
+  padding: 10px 20px; /* Add some padding to make it look like a button */
+  background-color: #007bff; /* Example background color (blue) */
+  color: white; /* Example text color */
+  text-decoration: none; /* Remove underline from link */
+  border-radius: 5px; /* Rounded corners */
+  display: inline-block; /* Allows padding and margin to apply correctly */
+  margin: 10px 0; /* Add some vertical space */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.infographic-link-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

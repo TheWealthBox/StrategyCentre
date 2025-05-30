@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 // Import ALL necessary Firebase instances and functions from your firebase.js file
-// 'getDoc' is removed as it's not directly used in App.js; it's used in StrategyDetails.js
 import {
   db,
   auth,
@@ -23,9 +22,8 @@ import {
 import './App.css'; // Your main App.css for general styles
 import StrategyDetails from './StrategyDetails'; // Your StrategyDetails component
 
-// --- NEW ADDITION: Import your new InfographicPage component ---
+// Import your InfographicPage component (assuming it's directly in src/)
 import InfographicPage from './InfographicPage';
-// --- END NEW ADDITION ---
 
 // App ID for Firestore collections - using direct assignment for local builds
 const appId = 'default-investment-app';
@@ -90,16 +88,15 @@ const Home = () => {
         <p className="app-intro">No strategies available. Please upload data to Firestore.</p>
       )}
 
-      {/* --- NEW ADDITION: Link to your new Infographic Page --- */}
+      {/* Updated Link to your Infographic Page with new text and class for styling */}
       <div className="infographic-link-container" style={{ marginTop: '20px' }}>
-        <Link to="/infographic" className="infographic-link-button">View Infographic Article</Link>
+        <Link to="/infographic" className="infographic-link-button">
+          View Infographic Article to Understand Strategy Details
+        </Link>
       </div>
-      {/* --- END NEW ADDITION --- */}
 
       <p className="login-prompt">
         If you have a login screen, ensure you've logged in or bypassed it to see this content.
-        <br/>
-        {/* The image_bdc552.png reference was for a login screen, ensure it's handled */}
       </p>
     </div>
   );
@@ -351,13 +348,8 @@ const App = () => {
               <Route path="/" element={<Home />} />
               {/* Route for individual strategy details page */}
               <Route path="/strategies/:strategyCode" element={<StrategyDetails />} />
-              {/* Add other routes as needed */}
-
-              {/* --- NEW ADDITION START --- */}
               {/* Add the new route for your InfographicPage */}
               <Route path="/infographic" element={<InfographicPage />} />
-              {/* --- NEW ADDITION END --- */}
-
             </Routes>
           </div>
         )}
